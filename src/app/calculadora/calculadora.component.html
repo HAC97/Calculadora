@@ -1,29 +1,9 @@
-<div class="container mt-5">
-    <div class="card">
-      <div class="card-header text-center">
-        Calculadora
-      </div>
-      <div class="card-body">
-        <div class="form-group">
-          <label for="numero1">Primer número:</label>
-          <input class="form-control" type="number" [(ngModel)]="numero1" id="numero1">
-        </div>
-        <select class="operacion" [(ngModel)]="operacion">
-          <option value="+">+</option>
-          <option value="-">-</option>
-          <option value="*">*</option>
-          <option value="/">/</option>
-        </select>
-        <div class="form-group">
-          <label for="numero2">Segundo número:</label>
-          <input class="form-control" type="number" [(ngModel)]="numero2" id="numero2">
-        </div>
-        <button class="btn btn-primary"  (click)="calcular()">Calcular</button>
-        <div class="form-group mt-3">
-          <label for="resultado">Resultado:</label>
-          <input class="form-control" type="number" [(ngModel)]="resultado" id="resultado" readonly>
-        </div>
-      </div>
-    </div>
+<div class="calculadora">
+  <div class="pantalla">{{ numero1 }} {{ operacion }} {{ numero2 }}</div>
+  <div class="botones">
+    <button class="numero" *ngFor="let numero of [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]" (click)="agregarNumero(numero)">{{ numero }}</button>
+    <button class="operacion" *ngFor="let operacion of ['+', '-', '*', '/']" (click)="seleccionarOperacion(operacion)">{{ operacion }}</button>
+    <button class="borrar" (click)="borrarTodo()">C</button>
+    <button class="calcular" (click)="calcular()">=</button>
   </div>
-  
+</div>

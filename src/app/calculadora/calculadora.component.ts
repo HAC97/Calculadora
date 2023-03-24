@@ -1,51 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-calculadora',
   templateUrl: './calculadora.component.html',
   styleUrls: ['./calculadora.component.css']
 })
-export class CalculadoraComponent implements OnInit {
+export class CalculadoraComponent {
+
   numero1: number = 0;
   numero2: number = 0;
-  operacion: string = '+';
+  operacion: string = '';
   resultado: number = 0;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  agregarNumero(numero: number) {
+    if (this.operacion === '') {
+      this.numero1 = this.numero1 * 10 + numero;
+    } else {
+      this.numero2 = this.numero2 * 10 + numero;
+    }
+    this.resultado = 0;
   }
-
-  calcular(): void {
-    const num1 = parseFloat(this.numero1.toString());
-    const num2 = parseFloat(this.numero2.toString());
-
+  seleccionarOperacion(operacion: string) {
+    this.operacion = operacion;
+  }
+  calcular() {
     switch (this.operacion) {
       case '+':
-        this.resultado = num1 + num2;
+        this.resultado = this.numero1 + this.numero2;
         break;
       case '-':
-        this.resultado = num1 - num2;
+        this.resultado = this.numero1 - this.numero2;
         break;
       case '*':
-        this.resultado = num1 * num2;
+        this.resultado = this.numero1 * this.numero2;
         break;
       case '/':
-        this.resultado = num1 / num2;
+        this.resultado = this.numero1 / this.numero2;
         break;
       default:
         this.resultado = 0;
         break;
     }
+    this.numero1 = this.resultado;
+    this.numero2 = 0;
+    this.operacion = '';
   }
-  presionarBoton(event: MouseEvent): void {
-    const boton = event.currentTarget as HTMLElement;
-    boton.classList.add('pressed');
-    setTimeout(() => {
-      boton.classList.remove('pressed');
-    }, 100);
+  borrarTodo() {
+    this.numero1 = 0;
+    this.numero2 = 0;
+    this.operacion = '';
+    this.resultado = 0;
   }
-  
-
+    
 }
-
